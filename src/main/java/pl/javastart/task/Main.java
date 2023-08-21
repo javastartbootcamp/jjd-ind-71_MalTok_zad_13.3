@@ -22,8 +22,7 @@ public class Main {
             List<Currency> currencyList = importReader.createCurrenciesListFromFile(currencyListFile);
 
             if (!productsList.isEmpty() && !currencyList.isEmpty()) {
-                ImportCalculator importCalc = new ImportCalculator();
-                importCalc.fillEuroPriceList(productsList, currencyList);
+                ImportCalculator importCalc = new ImportCalculator(productsList, currencyList);
 
                 BigDecimal totalEuroPrice = importCalc.countTotalEuroPrice();
                 System.out.println("Suma wszystkich produktów w EUR: " + totalEuroPrice);
@@ -38,6 +37,8 @@ public class Main {
                 BigDecimal minEuroPrice = importCalc.findMinEuroPrice();
                 ProductEuroPrice leastExpensiveProduct = importCalc.findProductByEuroPrice(minEuroPrice);
                 System.out.printf("Najtańszy produkt to: %s", leastExpensiveProduct);
+            } else {
+                System.out.println("Lista jest pusta, nie można przetworzyć danych");
             }
         } catch (FileNotFoundException e) {
             System.err.println("Nie odnaleziono pliku");

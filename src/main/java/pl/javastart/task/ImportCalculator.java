@@ -11,11 +11,12 @@ import java.util.List;
 public class ImportCalculator {
     private final List<ProductEuroPrice> euroPriceList;
 
-    public ImportCalculator() {
+    public ImportCalculator(List<Product> list, List<Currency> currencyList) {
         this.euroPriceList = new ArrayList<>();
+        fillEuroPriceList(list, currencyList);
     }
 
-    public void fillEuroPriceList(List<Product> list, List<Currency> currencyList) {
+    private void fillEuroPriceList(List<Product> list, List<Currency> currencyList) {
         for (Product product : list) {
             BigDecimal euroPrice = countEuroPrice(product, currencyList);
             euroPriceList.add(new ProductEuroPrice(product, euroPrice));
